@@ -21,6 +21,10 @@ pipeline{
          
         }
           stage("deploy on prod"){
+          input {
+             message 'should we proceed?'
+             ok 'yes we should'
+             }
             steps{
                 //deploy on container
                 deploy adapters: [tomcat9(credentialsId: 'tomcat9', path: '', url: 'http://13.214.149.177:8080/')], contextPath: 'app2', war: '**/*.war'
